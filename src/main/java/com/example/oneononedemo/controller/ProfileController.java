@@ -2,12 +2,14 @@ package com.example.oneononedemo.controller;
 
 import com.example.oneononedemo.dto.ProfileDto;
 import com.example.oneononedemo.entity.Profile;
+import com.example.oneononedemo.exception.ProfileNotFoundException;
 import com.example.oneononedemo.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +27,16 @@ public class ProfileController {
   public ResponseEntity<ProfileDto> createProfile(@RequestBody ProfileDto profileDto) {
     ProfileDto createdProfile = profileService.createProfile(profileDto);
     return new ResponseEntity<>(createdProfile, HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/{id}")
+  public ResponseEntity<ProfileDto> getProfileById(@PathVariable("id") Long profileId)
+      throws ProfileNotFoundException{
+    try {
+      ProfileDto foundProfile = profileService.getProfileById(profileId);
+      return new ResponseEntity<>(foundProfile, HttpStatus.OK);
+    } catch (ProfileNotFoundException ex) {
+      throw ex;
+    }
   }
 }

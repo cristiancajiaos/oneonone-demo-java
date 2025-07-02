@@ -1,7 +1,6 @@
 package com.example.oneononedemo.controller;
 
 import com.example.oneononedemo.dto.ProfileDto;
-import com.example.oneononedemo.entity.Profile;
 import com.example.oneononedemo.exception.ProfileNotFoundException;
 import com.example.oneononedemo.service.ProfileService;
 import java.util.List;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,5 +46,17 @@ public class ProfileController {
     List<ProfileDto> profiles = profileService.getAllProfiles();
     return new ResponseEntity<>(profiles, HttpStatus.OK);
   }
+
+  @PutMapping(value = "")
+  public ResponseEntity<ProfileDto> updateProfile(@RequestBody ProfileDto profileDto)
+      throws ProfileNotFoundException {
+    try {
+      ProfileDto profileDtoUpdated = profileService.updateProfile(profileDto);
+      return new ResponseEntity<>(profileDtoUpdated, HttpStatus.OK);
+    } catch (ProfileNotFoundException ex) {
+      throw ex;
+    }
+  }
+
 
 }

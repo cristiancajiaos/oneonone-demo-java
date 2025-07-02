@@ -39,4 +39,18 @@ public class ProfileServiceImpl implements ProfileService {
     List<Profile> profiles = profileRepository.findAll();
     return profiles.stream().map((pr) -> ProfileMapper.mapToProfileDto(pr)).collect(Collectors.toList());
   }
+
+  @Override
+  public ProfileDto updateProfile(ProfileDto profileDto) throws ProfileNotFoundException {
+    Long profileId = profileDto.getId();
+    Optional<Profile> profileToFind = profileRepository.findById(profileId);
+    if (profileToFind.isEmpty()) {
+      throw new ProfileNotFoundException("Profile with ID " + profileId + " not found");
+    }
+    Profile profileFound = profileToFind.get();
+    profileFound.setPhoneNumber(profileDto.getPhoneNumber());
+    profileFound.setAddress(profileDto.getAddress());
+    Profile profileSaved = profileRepository.save(profileFound);
+    return ProfileMapper.mapToProfileDto(profileSaved);
+  }
 }

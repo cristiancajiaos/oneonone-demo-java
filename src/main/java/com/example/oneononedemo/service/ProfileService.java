@@ -12,4 +12,6 @@ public interface ProfileService {
 
   List<ProfileDto> getAllProfiles();
 
+  ProfileDto updateProfile(ProfileDto profileDto) throws ProfileNotFoundException;
+
 }

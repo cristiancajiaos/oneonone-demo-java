@@ -53,4 +53,15 @@ public class ProfileServiceImpl implements ProfileService {
     Profile profileSaved = profileRepository.save(profileFound);
     return ProfileMapper.mapToProfileDto(profileSaved);
   }
+
+  @Override
+  public ProfileDto deleteProfile(Long id) throws ProfileNotFoundException {
+    Optional<Profile> profileFound = profileRepository.findById(id);
+    if (profileFound.isEmpty()) {
+      throw new ProfileNotFoundException("Profile with ID " + id + " not found");
+    }
+    profileRepository.deleteById(id);
+    Profile profileDeleted = profileFound.get();
+    return ProfileMapper.mapToProfileDto(profileDeleted);
+  }
 }

@@ -1,6 +1,7 @@
 package com.example.oneononedemo.controller;
 
 import com.example.oneononedemo.dto.ProfileDto;
+import com.example.oneononedemo.entity.Profile;
 import com.example.oneononedemo.exception.ProfileNotFoundException;
 import com.example.oneononedemo.service.ProfileService;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,5 +60,14 @@ public class ProfileController {
     }
   }
 
-
+  @DeleteMapping(value = "/{id}")
+  public ResponseEntity<ProfileDto> deleteProfile(@PathVariable("id") Long id)
+      throws ProfileNotFoundException {
+    try {
+      ProfileDto profileFound = profileService.deleteProfile(id);
+      return new ResponseEntity<>(profileFound, HttpStatus.OK);
+    } catch (ProfileNotFoundException ex) {
+      throw ex;
+    }
+  }
 }

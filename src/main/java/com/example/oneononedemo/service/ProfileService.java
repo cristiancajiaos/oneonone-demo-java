@@ -14,4 +14,6 @@ public interface ProfileService {
 
   ProfileDto updateProfile(ProfileDto profileDto) throws ProfileNotFoundException;
 
+  ProfileDto deleteProfile(Long id) throws ProfileNotFoundException;
+
 }

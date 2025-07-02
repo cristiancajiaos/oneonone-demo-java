@@ -1,6 +1,7 @@
 package com.example.oneononedemo.dto;
 
 import com.example.oneononedemo.entity.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.Timestamp;
 
 public class ProfileDto {
@@ -8,7 +9,10 @@ public class ProfileDto {
   private Long id;
   private String phoneNumber;
   private String address;
+
+  @JsonIgnore
   private User user;
+
   private Timestamp created;
   private Timestamp updated;
 
@@ -49,10 +53,12 @@ public class ProfileDto {
     this.address = address;
   }
 
+  @JsonIgnore
   public User getUser() {
     return user;
   }
 
+  @JsonIgnore
   public void setUser(User user) {
     this.user = user;
   }

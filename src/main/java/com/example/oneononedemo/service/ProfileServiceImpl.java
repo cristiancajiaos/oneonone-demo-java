@@ -5,7 +5,9 @@ import com.example.oneononedemo.entity.Profile;
 import com.example.oneononedemo.exception.ProfileNotFoundException;
 import com.example.oneononedemo.mapper.ProfileMapper;
 import com.example.oneononedemo.repository.ProfileRepository;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,11 @@ public class ProfileServiceImpl implements ProfileService {
     }
     Profile foundProfile = profileToFind.get();
     return ProfileMapper.mapToProfileDto(foundProfile);
+  }
+
+  @Override
+  public List<ProfileDto> getAllProfiles() {
+    List<Profile> profiles = profileRepository.findAll();
+    return profiles.stream().map((pr) -> ProfileMapper.mapToProfileDto(pr)).collect(Collectors.toList());
   }
 }

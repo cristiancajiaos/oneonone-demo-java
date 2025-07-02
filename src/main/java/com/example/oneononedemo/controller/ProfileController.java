@@ -4,6 +4,7 @@ import com.example.oneononedemo.dto.ProfileDto;
 import com.example.oneononedemo.entity.Profile;
 import com.example.oneononedemo.exception.ProfileNotFoundException;
 import com.example.oneononedemo.service.ProfileService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,4 +40,11 @@ public class ProfileController {
       throw ex;
     }
   }
+
+  @GetMapping(value = "")
+  public ResponseEntity<List<ProfileDto>> getAllProfiles() {
+    List<ProfileDto> profiles = profileService.getAllProfiles();
+    return new ResponseEntity<>(profiles, HttpStatus.OK);
+  }
+
 }

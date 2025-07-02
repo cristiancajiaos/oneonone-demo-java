@@ -36,4 +36,54 @@ public class User {
   @UpdateTimestamp
   private Timestamp updated;
 
+  public User() {
+  }
+
+  public User(Long id, String name, Profile profile, Timestamp created, Timestamp updated) {
+    this.id = id;
+    this.name = name;
+    this.profile = profile;
+    this.created = created;
+    this.updated = updated;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Profile getProfile() {
+    return profile;
+  }
+
+  public void setProfile(Profile profile) {
+    this.profile = profile;
+  }
+
+  public Timestamp getCreated() {
+    return created;
+  }
+
+  public void setCreated(Timestamp created) {
+    this.created = created;
+  }
+
+  public Timestamp getUpdated() {
+    return updated;
+  }
+
+  public void setUpdated(Timestamp updated) {
+    this.updated = updated;
+  }
 }

@@ -1,46 +1,22 @@
-package com.example.oneononedemo.entity;
+package com.example.oneononedemo.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.example.oneononedemo.entity.User;
 import java.sql.Timestamp;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity
-@Table(name = "profile")
-public class Profile {
+public class ProfileDto {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
-  @Column(name = "phone_number")
   private String phoneNumber;
-
-  @Column(name = "address")
   private String address;
-
-  @OneToOne(mappedBy = "profile")
   private User user;
-
-  @Column(name = "created")
-  @CreationTimestamp
   private Timestamp created;
-
-  @Column(name = "updated")
-  @UpdateTimestamp
   private Timestamp updated;
 
-  public Profile() {
+  public ProfileDto() {
   }
 
-  public Profile(Long id, String phoneNumber, String address,
-      User user, Timestamp created, Timestamp updated) {
+  public ProfileDto(Long id, String phoneNumber, String address, User user,
+      Timestamp created, Timestamp updated) {
     this.id = id;
     this.phoneNumber = phoneNumber;
     this.address = address;
